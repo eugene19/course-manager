@@ -1,0 +1,49 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <display-name>Course manager</display-name>
+
+    <servlet>
+        <servlet-name>courseServlet</servlet-name>
+        <servlet-class>by.epamtc.courses.servlet.CoursesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>by.epamtc.courses.servlet.UserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>courseServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>charsetFilter</filter-name>
+        <filter-class>by.epamtc.courses.filter.CharacterFilter</filter-class>
+        <init-param>
+            <param-name>charset</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter>
+        <filter-name>securityFilter</filter-name>
+        <filter-class>by.epamtc.courses.filter.SecurityFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>charsetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>securityFilter</filter-name>
+        <servlet-name>courseServlet</servlet-name>
+    </filter-mapping>
+</web-app>
